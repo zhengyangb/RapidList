@@ -26,7 +26,7 @@ const TodoAddBox = (props) => {
         }
         const todoItem = {
             title: title,
-            due: null,
+            due: dueDate,
         };
         props.addItem(todoItem);
         setTitle('');
@@ -47,6 +47,16 @@ const TodoAddBox = (props) => {
         setDropDownDisplay(display=>(!display));
     };
 
+    const removeDueDateHandler = () =>{
+        setDropDownDisplay(false);
+        setDueDate(null);
+    };
+
+    const daySelectedHandler = (momentObject) => {
+        setDueDate(momentObject.clone());
+        setDropDownDisplay(false);
+    }
+
 
 
     return (
@@ -60,7 +70,7 @@ const TodoAddBox = (props) => {
                     onKeyUp={inputBoxKeyUpHandler}
                 />
                 <div className={classes.addInfo}>
-                    time
+                    {dueDate ? dueDate.format('MMM D') : null}
                 </div>
             </div>
 
@@ -72,8 +82,10 @@ const TodoAddBox = (props) => {
                 </div>
                 <Dropdown display={dropdownDisplay}>
                     <Calendar
-                        dateSelected={null}
+                        dateSelected={dueDate}
                         toggleCal={toggleDropdownDisplay}
+                        removeDueDate={removeDueDateHandler}
+                        selectDate={daySelectedHandler}
                     />
                 </Dropdown>
             </div>

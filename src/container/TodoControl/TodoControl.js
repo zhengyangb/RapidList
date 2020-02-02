@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import TodoPage from '../../components/Todo/TodoPage/TodoPage';
+import moment from "moment";
 
 class TodoControl extends Component{
     idCount = 4;
     state = {
         todos : [
-            {id: 0, title: "drink milk test", isDone: false, due: new Date(2020, 0, 10)},
-            {id: 1, title: "exercise test", isDone: true, due: new Date(2020, 2, 10)},
+            {id: 0, title: "drink milk test", isDone: false, due: moment(new Date(2020, 0, 10))},
+            {id: 1, title: "exercise test", isDone: true, due: moment(new Date(2020, 2, 10))},
             {id: 2, title: "watch movie test", isDone: true, due: null},
-            {id: 3, title: "go to park test", isDone: true, due: new Date(2019, 9, 1)}
+            {id: 3, title: "go to park test", isDone: true, due: moment(new Date(2019, 9, 1))}
         ],
 
     };

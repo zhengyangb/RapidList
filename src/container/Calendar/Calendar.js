@@ -9,7 +9,8 @@ class Calendar extends Component {
     };
 
     componentDidMount() {
-        this.setState({viewMonth: this.props.dateSelected === null ? moment() : this.props.dateSelected})
+        this.setState({viewMonth: this.props.dateSelected === null ? moment() : this.props.dateSelected.clone()});
+        this.updateIsViewMonthThisMonth();
     }
 
     updateIsViewMonthThisMonth(){
@@ -18,10 +19,22 @@ class Calendar extends Component {
 
     monthAddedHandler = () => {
         this.setState(prevState =>({viewMonth: prevState.viewMonth.add(1,'M')}));
+        this.updateIsViewMonthThisMonth();
     };
 
     monthSubtractedHandler = () => {
-        this.setState(prevState =>({viewMonth: prevState.viewMonth.subtract(1,'M')}))
+        this.setState(prevState =>({viewMonth: prevState.viewMonth.subtract(1,'M')}));
+        this.updateIsViewMonthThisMonth();
+    };
+
+    backToThisMonthHandler = () => {
+        this.setState({viewMonth: this.props.dateSelected === null ? moment() : this.props.dateSelected});
+        this.updateIsViewMonthThisMonth();
+    };
+
+    selectDateAndReturnHandler = (i) => {
+        const momentObject = this.state.viewMonth.clone().date(i+1);
+        this.props.selectDate(momentObject);
     };
 
     generateCalendarBody(){
@@ -30,15 +43,21 @@ class Calendar extends Component {
         const lastRowBlanksNum = (7 - this.state.viewMonth.clone().add(1, 'month').startOf('month').day()) % 7;
         const numOfDaysInMonth = this.state.viewMonth.clone().add(1, 'month').startOf('month').subtract(1, 'day').date();
         const currentDay = moment().date();
-        calendarBodyRaw.push(...[...Array(firstRowBlanksNum)].map((_, i)=>{return <td key={'frontBlanks' + i}></td>}));
-        calendarBodyRaw.push(...[...Array(numOfDaysInMonth)].map((_, i)=>{return (
-            <td
-                key={'day' + i}
-                className={(this.state.isViewMonthThisMonth && i+1 === currentDay) ? classes.todayTd : null }>
-                <div className={classes.circleTd}>{i+1}</div>
+        calendarBodyRaw.push(...[...Array(firstRowBlanksNum)].map((_, i)=>{return <td key={'frontBlanks' + i}> </td>}));
+        calendarBodyRaw.push(...[...Array(numOfDaysInMonth)].map((_, i)=>{
+            const isToday = this.state.isViewMonthThisMonth && i+1 === currentDay;
+            const isSelected = this.state.viewMonth.isSame(this.props.dateSelected, 'month') && this.state.viewMonth.date() === i+1;
+            return (
+                <td
+                    key={'day' + i}
+                    className={isToday ? classes.todayTd : null }
+                    onClick={() => {this.selectDateAndReturnHandler(i)}}
+                >
+                    <div className={[classes.circleTd, isSelected ? classes.circleSelect : null].join(' ')}>{i+1}</div>
 
-            </td>
-        )}));
+                </td>
+            )
+        }));
         calendarBodyRaw.push(...[...Array(lastRowBlanksNum)].map((_, i)=>{return <td key={'endBlanks' + i}></td>}));
         const numOfRows = (firstRowBlanksNum + lastRowBlanksNum + numOfDaysInMonth) / 7;
         const res = [...Array(numOfRows)].map((_, i)=>{return (
@@ -76,12 +95,19 @@ class Calendar extends Component {
                 <div>
                     <button
                         className={classes.buttonLong}
-                        disabled={!this.state.isViewMonthThisMonth}>Back to this month</button>
+                        disabled={this.state.isViewMonthThisMonth}
+                        onClick={this.backToThisMonthHandler}>Back to this month</button>
                 </div>
                 <div>
                     <button
                         className={classes.buttonLong}
                         onClick={this.props.toggleCal}>Cancel</button>
+                </div>
+                <div>
+                    <button
+                        className={[classes.buttonLong, classes.buttonWarning].join(' ')}
+                        disabled={this.props.dateSelected === null}
+                        onClick={this.props.removeDueDate}>Remove due date</button>
                 </div>
             </div>
         );

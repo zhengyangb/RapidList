@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './TodoListItem.module.css';
 
 const todoListItem  = (props) => {
-    const date = props.item.due === null? '' : props.item.due.toDateString().substring(4,10);
+    const date = props.item.due === null? '' : props.item.due.format('MMM D');
     const isOverdue = props.item.due === null || props.item.due === undefined || props.item.isDone? false: props.item.due <= Date.now();
     const titleClasses = [classes.ItemTitle, props.item.isDone?classes.isDone:classes.isNotDone];
     return (

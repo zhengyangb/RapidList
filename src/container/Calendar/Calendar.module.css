@@ -53,9 +53,10 @@
     cursor:pointer;
 }
 
-.todayTd:hover{
+.todayTd{
     font-weight: bold;
 }
+
 
 .circleTd {
     height: 15px;
@@ -67,6 +68,11 @@
 
 .circleTd:hover {
     background-color: rgba(1,1,1,0.2);
+}
+
+.circleSelect,
+.circleSelect:hover {
+    background-color: #91D6CB;
 }
 
 .buttonLong{
@@ -82,4 +88,26 @@
     background-color: #2E6989;
     color: white;
     cursor: pointer;
+}
+
+.buttonWarning{
+    border: 1px solid #F9190E;
+    color: #F9190E;
+}
+
+.buttonWarning:hover{
+    background-color: #F9190E;
+}
+
+.buttonLong:disabled{
+    cursor: not-allowed;
+    border-color: #DCDCDC;
+    color: #DCDCDC;
+}
+
+.buttonLong:disabled:hover{
+    border-color: #DCDCDC;
+    color: #DCDCDC;
+    background-color: white;
+    cursor: not-allowed;
 }
