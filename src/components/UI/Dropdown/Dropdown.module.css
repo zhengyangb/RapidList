@@ -1,0 +1,19 @@
+.Dropdown{
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    min-width: 150px;
+    box-shadow: 0 0 10px 0 #CCCCCC;
+    padding: 10px;
+    z-index: 50;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+}
+
+.Show{
+    opacity: 1;
+}
+
+.Hide{
+    opacity: 0;
+}

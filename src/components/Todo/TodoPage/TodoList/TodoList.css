@@ -1,0 +1,13 @@
+.TodoList{
+    width: 90%;
+    list-style: none;
+    padding-left: 0;
+    margin: 16px auto;
+}
+
+.TodoList li{
+    margin: 0 0 -1px 0;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #DCDCDC;
+}

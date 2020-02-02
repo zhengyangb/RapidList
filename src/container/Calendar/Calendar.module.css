@@ -1,0 +1,85 @@
+.Calendar{
+    /*height: 200px;*/
+    width: 150px;
+}
+
+.CalHeader{
+    height: 1em;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+}
+
+.CalHeader div:first-child,
+.CalHeader div:last-child{
+    color: #91D6CB;
+    width: 20px;
+}
+
+.CalHeader div:last-child{
+    text-align: right;
+}
+
+.CalHeader div:first-child:hover,
+.CalHeader div:last-child:hover{
+    color: #DCDCDC;
+    cursor: pointer;
+}
+
+.CalTab{
+    font-size: 0.5em;
+    text-align: center;
+    padding: 0;
+    margin: 10px 0;
+    width: 150px;
+}
+
+.CalTab thead, .CalTab tbody, .CalTab td{
+    padding: 0;
+    margin: auto;
+}
+
+
+.CalTab td{
+    display: inline-block;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    height: 15px;
+    width: 20px;
+
+}
+
+.CalTab td:hover{
+    cursor:pointer;
+}
+
+.todayTd:hover{
+    font-weight: bold;
+}
+
+.circleTd {
+    height: 15px;
+    width: 15px;
+    margin: auto;
+    background-color: rgba(1,1,1,0);
+    border-radius: 50%;
+}
+
+.circleTd:hover {
+    background-color: rgba(1,1,1,0.2);
+}
+
+.buttonLong{
+    border: 1px solid #2E6989;
+    width: 100%;
+    margin: 1px;
+    color: #2E6989;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.buttonLong:hover{
+    background-color: #2E6989;
+    color: white;
+    cursor: pointer;
+}

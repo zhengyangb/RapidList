@@ -1,0 +1,47 @@
+.TodoListItem{
+    padding: 0.5em;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.TodoListItem:hover,
+.TodoListItem:active{
+    background-color: #F2F2F2;
+}
+
+.TodoListItem .ItemTitle span:hover,
+.TodoListItem .ItemTitle span:active{
+    cursor: pointer;
+}
+
+.TodoListItem .ItemCheck{
+    width: 2em;
+    min-width: 1em;
+}
+
+.ItemCheck input[type='checkbox'] {
+    transform: scale(1.2);
+}
+
+.TodoListItem .ItemTitle{
+    width: 80%;
+}
+
+.TodoListItem .ItemAddInfo{
+    width: 10%;
+    min-width: 3em;
+}
+
+.overdue{
+    color: #F71339;
+}
+
+.notdue{
+    color: #888888;
+}
+
+.ItemTitle.isDone{
+    text-decoration: line-through;
+    color: #888888;
+}
