@@ -12,7 +12,7 @@ const sideDrawer = (props) => {
         <div>
             <Backdrop show={props.open} clicked={props.closed}/>
             <div className={attachedClasses.join(' ')}>
-                <div>Logo</div>
+                <div style={{marginBottom: "10px"}}>Rapid<strong>List</strong></div>
                 <nav>
                     <NavigationItems/>
                 </nav>

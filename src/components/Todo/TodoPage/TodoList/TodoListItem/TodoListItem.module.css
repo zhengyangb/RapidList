@@ -21,7 +21,6 @@
 }
 
 .ItemCheck input[type='checkbox'] {
-    transform: scale(1.2);
 }
 
 .TodoListItem .ItemTitle{
@@ -29,8 +28,9 @@
 }
 
 .TodoListItem .ItemAddInfo{
-    width: 10%;
+    width: 20%;
     min-width: 3em;
+    text-align: right;
 }
 
 .overdue{

@@ -9,27 +9,36 @@ class Calendar extends Component {
     };
 
     componentDidMount() {
-        this.setState({viewMonth: this.props.dateSelected === null ? moment() : this.props.dateSelected.clone()});
-        this.updateIsViewMonthThisMonth();
+        this.setState({
+            viewMonth: this.props.dateSelected === null ? moment() : this.props.dateSelected.clone(),
+            isViewMonthThisMonth: this.props.dateSelected === null ? true : this.props.dateSelected.clone().startOf('month').isSame(moment().startOf('month'))
+        });
     }
 
-    updateIsViewMonthThisMonth(){
-        this.setState(prevState=>({isViewMonthThisMonth: prevState.viewMonth.clone().startOf('month').isSame(moment().startOf('month'))}));
+    componentDidUpdate(prevProps, prevState, snapshot) {
     }
+
 
     monthAddedHandler = () => {
-        this.setState(prevState =>({viewMonth: prevState.viewMonth.add(1,'M')}));
-        this.updateIsViewMonthThisMonth();
+        this.setState(prevState =>{
+            return {
+            viewMonth: prevState.viewMonth.clone().add(1,'M'),
+            isViewMonthThisMonth: prevState.viewMonth.clone().add(1,'M').startOf('month').isSame(moment().startOf('month'))
+        }});
     };
 
     monthSubtractedHandler = () => {
-        this.setState(prevState =>({viewMonth: prevState.viewMonth.subtract(1,'M')}));
-        this.updateIsViewMonthThisMonth();
+        this.setState(prevState =>({
+            viewMonth: prevState.viewMonth.clone().subtract(1,'M'),
+            isViewMonthThisMonth: prevState.viewMonth.clone().subtract(1,'M').startOf('month').isSame(moment().startOf('month'))
+        }));
     };
 
     backToThisMonthHandler = () => {
-        this.setState({viewMonth: this.props.dateSelected === null ? moment() : this.props.dateSelected});
-        this.updateIsViewMonthThisMonth();
+        this.setState({
+            viewMonth: moment(),
+            isViewMonthThisMonth: true
+        });
     };
 
     selectDateAndReturnHandler = (i) => {
@@ -46,7 +55,7 @@ class Calendar extends Component {
         calendarBodyRaw.push(...[...Array(firstRowBlanksNum)].map((_, i)=>{return <td key={'frontBlanks' + i}> </td>}));
         calendarBodyRaw.push(...[...Array(numOfDaysInMonth)].map((_, i)=>{
             const isToday = this.state.isViewMonthThisMonth && i+1 === currentDay;
-            const isSelected = this.state.viewMonth.isSame(this.props.dateSelected, 'month') && this.state.viewMonth.date() === i+1;
+            const isSelected = this.state.viewMonth.isSame(this.props.dateSelected, 'month') && this.props.dateSelected.date() === i+1;
             return (
                 <td
                     key={'day' + i}
@@ -96,7 +105,7 @@ class Calendar extends Component {
                     <button
                         className={classes.buttonLong}
                         disabled={this.state.isViewMonthThisMonth}
-                        onClick={this.backToThisMonthHandler}>Back to this month</button>
+                        onClick={this.backToThisMonthHandler}>Go to current month</button>
                 </div>
                 <div>
                     <button

@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     background-color: white;
-    box-shadow: 0 0 5px 1px #423A2F;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.2);
 
     display: flex;
     justify-content: space-between;

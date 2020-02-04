@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './TodoAddBox.module.css';
 
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -7,13 +7,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Dropdown from '../../../UI/Dropdown/Dropdown';
 import Calendar from "../../../../container/Calendar/Calendar";
-import moment from "moment";
+// import moment from "moment";
 
 const TodoAddBox = (props) => {
+
+    useEffect(()=> {setDueDate(props.defaultDueDate)}, [props.defaultDueDate])
+
     const [title, setTitle] = useState('');
     const [canAddItem, setCanAddItem] = useState(false);
-    const [dropdownDisplay, setDropDownDisplay] = useState(true);
-    const [dueDate, setDueDate] = useState(null);
+    const [dropdownDisplay, setDropDownDisplay] = useState(false);
+    const [dueDate, setDueDate] = useState(props.defaultDueDate);
 
     const titleChangedHandler = event => {
         setTitle(event.target.value);
@@ -31,6 +34,7 @@ const TodoAddBox = (props) => {
         props.addItem(todoItem);
         setTitle('');
         setCanAddItem(false);
+        setDueDate(props.defaultDueDate);
         //reset time also
     };
 
@@ -55,7 +59,7 @@ const TodoAddBox = (props) => {
     const daySelectedHandler = (momentObject) => {
         setDueDate(momentObject.clone());
         setDropDownDisplay(false);
-    }
+    };
 
 
 

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import TodoPage from '../../components/Todo/TodoPage/TodoPage';
+import Summary from "../../components/Summary/Summary";
+
 import moment from "moment";
+import {Redirect, Route, Switch} from "react-router";
 
 class TodoControl extends Component{
     idCount = 4;
@@ -9,7 +12,7 @@ class TodoControl extends Component{
             {id: 0, title: "drink milk test", isDone: false, due: moment(new Date(2020, 0, 10))},
             {id: 1, title: "exercise test", isDone: true, due: moment(new Date(2020, 2, 10))},
             {id: 2, title: "watch movie test", isDone: true, due: null},
-            {id: 3, title: "go to park test", isDone: true, due: moment(new Date(2019, 9, 1))}
+            {id: 3, title: "go to park test", isDone: false, due: moment()}
         ],
 
     };
@@ -27,11 +30,30 @@ class TodoControl extends Component{
     render() {
         return (
             <div>
-                <h2>All items</h2>
-                <TodoPage
-                    todos={this.state.todos}
-                    addItem={this.addItemHandler}
-                />
+                <Switch>
+                    <Route path='/all/' render={(props) => (
+                        <TodoPage
+                            {...props}
+                            todos={this.state.todos}
+                            addItem={this.addItemHandler}
+                        />
+                    )}/>
+
+                    <Route path='/today/' render={(props) => (
+                        <TodoPage
+                            {...props}
+                            todos={this.state.todos.filter(todo => todo.due && todo.due.isSame(moment(), 'day'))}
+                            addItem={this.addItemHandler}
+                        />
+                    )}/>
+
+                    <Route path='/summary' render={(props) => (<Summary {...props}/>)}/>
+
+                    <Route path='/' exact>
+                        <Redirect to='/all/' />
+                    </Route>
+                </Switch>
+
             </div>
         );
     }

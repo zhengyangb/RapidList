@@ -10,15 +10,21 @@
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
+    color: black;
     display: block;
 }
 
 .NavigationItem a:hover,
 .NavigationItem a:active{
     background-color: #F2F2F2;
-    border-right: 4px solid #91D6CB;
     cursor: pointer;
 }
+
+.NavigationItem a.NavActive{
+    background-color: #F2F2F2;
+    border-right: 4px solid #91D6CB;
+}
+
 
 @media (min-width: 500px) {
     .NavigationItem{
@@ -38,6 +44,12 @@
 
     .NavigationItem a:hover,
     .NavigationItem a:active{
+        color: black;
+        background-color: #F2F2F2;
+        border-right: 0;
+    }
+
+    .NavigationItem a.NavActive{
         color: black;
         background-color: #F2F2F2;
         border-right: 0;
