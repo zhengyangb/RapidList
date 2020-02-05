@@ -26,7 +26,10 @@ class TodoPage extends Component {
                 {titleDisplay}
                 <div className="Page">
                     <TodoAddBox addItem={this.props.addItem} defaultDueDate={defaultDueDatePassing}/>
-                    <TodoList todos={this.props.todos}/>
+                    <TodoList
+                        todos={this.props.todos}
+                        checkItem={this.props.checkItem}
+                    />
                 </div>
             </div>
 

@@ -14,16 +14,17 @@
     display: block;
 }
 
+.NavigationItem a.NavActive{
+    border-right: 4px solid #91D6CB;
+}
+
 .NavigationItem a:hover,
 .NavigationItem a:active{
     background-color: #F2F2F2;
     cursor: pointer;
 }
 
-.NavigationItem a.NavActive{
-    background-color: #F2F2F2;
-    border-right: 4px solid #91D6CB;
-}
+
 
 
 @media (min-width: 500px) {
@@ -42,6 +43,12 @@
         border-bottom: 4px solid transparent;
     }
 
+    .NavigationItem a.NavActive{
+        color: black;
+        border-right: 0;
+        border-bottom: 4px solid #91D6CB;
+    }
+
     .NavigationItem a:hover,
     .NavigationItem a:active{
         color: black;
@@ -49,10 +56,5 @@
         border-right: 0;
     }
 
-    .NavigationItem a.NavActive{
-        color: black;
-        background-color: #F2F2F2;
-        border-right: 0;
-        border-bottom: 4px solid #91D6CB;
-    }
+
 }

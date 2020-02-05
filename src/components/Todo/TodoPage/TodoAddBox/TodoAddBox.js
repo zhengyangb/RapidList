@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import classes from './TodoAddBox.module.css';
 
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -22,6 +22,8 @@ const TodoAddBox = (props) => {
         setTitle(event.target.value);
         setCanAddItem((event.target.value === '') ? false : true);
     };
+
+    const inputRef = useRef(null);
 
     const addButtonClickedHandler = () => {
         if (!canAddItem){
@@ -54,11 +56,13 @@ const TodoAddBox = (props) => {
     const removeDueDateHandler = () =>{
         setDropDownDisplay(false);
         setDueDate(null);
+        inputRef.current.focus();
     };
 
     const daySelectedHandler = (momentObject) => {
         setDueDate(momentObject.clone());
         setDropDownDisplay(false);
+        inputRef.current.focus();
     };
 
 
@@ -68,6 +72,7 @@ const TodoAddBox = (props) => {
             <div className={classes.inputDiv}>
                 <input
                     type="text"
+                    ref={inputRef}
                     placeholder="Add a new item"
                     value={title}
                     onChange={titleChangedHandler}
