@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import TodoPage from '../../components/Todo/TodoPage/TodoPage';
 import Summary from "../../components/Summary/Summary";
 
+import listItemContext from "../../context/listItem-context";
+
 import moment from "moment";
 import {Redirect, Route, Switch} from "react-router";
 
@@ -42,16 +44,20 @@ class TodoControl extends Component{
 
 
     render() {
-        console.log(this.checkItemHandler);
+        const contextValue = {
+            addItem: this.addItemHandler,
+            checkItem: this.checkItemHandler,
+        };
         return (
             <div>
                 <Switch>
+
+                    <listItemContext.Provider value={contextValue}>
                     <Route path='/all/' render={(props) => (
                         <TodoPage
                             {...props}
                             todos={this.state.todos}
                             addItem={this.addItemHandler}
-                            checkItem={this.checkItemHandler}
                         />
                     )}/>
 
@@ -60,9 +66,10 @@ class TodoControl extends Component{
                             {...props}
                             todos={this.state.todos.filter(todo => todo.due && todo.due.isSame(moment(), 'day'))}
                             addItem={this.addItemHandler}
-                            checkItem={this.checkItemHandler}
                         />
                     )}/>
+
+                    </listItemContext.Provider>
 
                     <Route path='/summary' render={(props) => (<Summary {...props}/>)}/>
 
