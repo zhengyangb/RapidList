@@ -21,7 +21,7 @@ const TodoListItem  = (props) => {
                 <input
                     type='checkbox'
                     checked={props.item.isDone}
-                    onClick={boxCheckedHandler}
+                    onChange={boxCheckedHandler}
                 />
             </div>
             <div className={titleClasses.join(' ')}><span>{props.item.title}</span></div>

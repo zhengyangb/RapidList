@@ -47,6 +47,7 @@ class TodoControl extends Component{
         const contextValue = {
             addItem: this.addItemHandler,
             checkItem: this.checkItemHandler,
+            todos: this.state.todos
         };
         return (
             <div>
@@ -69,13 +70,14 @@ class TodoControl extends Component{
                         />
                     )}/>
 
-                    </listItemContext.Provider>
 
-                    <Route path='/summary' render={(props) => (<Summary {...props}/>)}/>
+
+                    <Route path='/summary/' render={(props) => (<Summary {...props}/>)}/>
 
                     <Route path='/' exact>
                         <Redirect to='/all/' />
                     </Route>
+                    </listItemContext.Provider>
                 </Switch>
 
             </div>

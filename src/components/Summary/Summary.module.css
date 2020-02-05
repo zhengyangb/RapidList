@@ -1,5 +1,24 @@
 .OuterBox{
     width: 70%;
     max-width: 600px;
-    margin: auto
+    margin: auto;
+    display: block;
+}
+
+.summaryRow{
+    width: 100%;
+    margin: 2em 0 2em;
+    height: 5em;
+    display: flex;
+    align-items: center;
+}
+
+.summaryNumber{
+    width: 30%;
+    font-size: 5vw;
+}
+
+.summaryText{
+    width: 60%;
+
 }
