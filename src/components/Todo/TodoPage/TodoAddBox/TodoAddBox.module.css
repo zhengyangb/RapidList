@@ -12,6 +12,9 @@
     border: 0;
     height: 2rem;
     flex:1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     box-sizing: border-box;
     margin: 0;
 }
@@ -33,11 +36,9 @@
 }
 
 .addInfo{
-    display: inline;
-    height: 100%;
+    display: block;
     float: right;
     font-size: 0.8em;
-    padding: 0.6em 0.6em 0.6em;
 }
 
 .buttonDiv{
