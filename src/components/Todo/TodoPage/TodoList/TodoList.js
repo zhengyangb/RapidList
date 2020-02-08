@@ -1,9 +1,10 @@
 import React from 'react';
+import {connect} from "react-redux";
 import './TodoList.css';
 import TodoListItem from './TodoListItem/TodoListItem';
 
-const todoList = (props) => {
-    const todoListItems = props.todos.map(item=>(<TodoListItem item={item} key={item.id}/>))
+const TodoList = (props) => {
+    const todoListItems = props.todos.filter(props.filter).map(item=>(<TodoListItem item={item} key={item.id}/>))
     return (
         <ul className="TodoList">
             {todoListItems}
@@ -11,4 +12,11 @@ const todoList = (props) => {
     )
 };
 
-export default todoList;
+const mapStateToProps = state => {
+    return {
+        todos: state.todos.items,
+    }
+};
+
+
+export default connect(mapStateToProps)(TodoList);

@@ -1,4 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
+import * as actionTypes from '../../../../../store/action';
 import classes from './TodoListItem.module.css';
 import moment from "moment";
 import listItemContext from "../../../../../context/listItem-context";
@@ -9,11 +11,11 @@ const TodoListItem  = (props) => {
     const isOverdue = props.item.due === null || props.item.due === undefined || props.item.isDone? false: props.item.due.isSameOrBefore(moment(), 'day');
     const titleClasses = [classes.ItemTitle, props.item.isDone?classes.isDone:classes.isNotDone];
 
-    const context = useContext(listItemContext);
-
-    const boxCheckedHandler = (event) => {
-        context.checkItem(props.item.id, event.target.checked)
-    };
+    // We replaced Context with Redux
+    // const context = useContext(listItemContext);
+    // const boxCheckedHandler = (event) => {
+    //     context.checkItem(props.item.id, event.target.checked)
+    // };
 
     return (
         <li className={classes.TodoListItem}>
@@ -21,7 +23,7 @@ const TodoListItem  = (props) => {
                 <input
                     type='checkbox'
                     checked={props.item.isDone}
-                    onChange={boxCheckedHandler}
+                    onChange={(event) => props.boxCheckedHandler(event, props.item.id)}
                 />
             </div>
             <div className={titleClasses.join(' ')}><span>{props.item.title}</span></div>
@@ -30,4 +32,14 @@ const TodoListItem  = (props) => {
     );
 };
 
-export default TodoListItem;
+const mapDispatchToProps = dispatch => {
+    return {
+        boxCheckedHandler: (event, id)=> dispatch({
+            type: actionTypes.CHECKBOX,
+            id: id,
+            checked: event.target.checked,
+        })
+    }
+};
+
+export default connect(null, mapDispatchToProps)(TodoListItem);

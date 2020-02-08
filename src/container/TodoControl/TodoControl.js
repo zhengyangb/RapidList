@@ -19,34 +19,34 @@ class TodoControl extends Component{
 
     };
 
-    addItemHandler = (item) => {
-        const itemToAdd = {...item};
-        itemToAdd.isDone = false;
-        itemToAdd.id = this.idCount++;
-        const todosNew = [...this.state.todos];
-        todosNew.push(itemToAdd);
-        this.setState({todos: todosNew});
-    };
+    // addItemHandler = (item) => {
+    //     const itemToAdd = {...item};
+    //     itemToAdd.isDone = false;
+    //     itemToAdd.id = this.idCount++;
+    //     const todosNew = [...this.state.todos];
+    //     todosNew.push(itemToAdd);
+    //     this.setState({todos: todosNew});
+    // };
 
-    checkItemHandler = (id, done) => {
-        this.setState(prevState => {
-            return {todos: prevState.todos.map(todo=>{
-                if (todo.id === id){
-                    todo.isDone = done;
-                    return todo;
-                }
-                else{
-                    return todo;
-                }
-            })
-        }});
-    };
+    // checkItemHandler = (id, done) => {
+    //     this.setState(prevState => {
+    //         return {todos: prevState.todos.map(todo=>{
+    //             if (todo.id === id){
+    //                 todo.isDone = done;
+    //                 return todo;
+    //             }
+    //             else{
+    //                 return todo;
+    //             }
+    //         })
+    //     }});
+    // };
 
 
     render() {
         const contextValue = {
-            addItem: this.addItemHandler,
-            checkItem: this.checkItemHandler,
+            // addItem: this.addItemHandler,
+            // checkItem: this.checkItemHandler,
             todos: this.state.todos
         };
         return (
@@ -57,16 +57,12 @@ class TodoControl extends Component{
                     <Route path='/all/' render={(props) => (
                         <TodoPage
                             {...props}
-                            todos={this.state.todos}
-                            addItem={this.addItemHandler}
                         />
                     )}/>
 
                     <Route path='/today/' render={(props) => (
                         <TodoPage
                             {...props}
-                            todos={this.state.todos.filter(todo => todo.due && todo.due.isSame(moment(), 'day'))}
-                            addItem={this.addItemHandler}
                         />
                     )}/>
 

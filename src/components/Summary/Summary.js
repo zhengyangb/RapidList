@@ -1,4 +1,5 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
 import classes from './Summary.module.css';
 import CountUp from "react-countup";
 import listItemContext from "../../context/listItem-context";
@@ -8,9 +9,9 @@ import {faClipboardCheck} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Summary = (props) => {
-    const context = useContext(listItemContext);
-    let todoDoneNum = context.todos.map(todo=>(+todo.isDone)).reduce((a, b)=>(a+b), 0);
-    let todoNum = context.todos.length === 0 ? 0 : context.todos.length;
+    // const context = useContext(listItemContext);
+    let todoDoneNum = props.todos.map(todo=>(+todo.isDone)).reduce((a, b)=>(a+b), 0);
+    let todoNum = props.todos.length === 0 ? 0 : props.todos.length;
 
     return (
         <div className={classes.OuterBox}>
@@ -21,6 +22,12 @@ const Summary = (props) => {
             </div>
         </div>
     );
-}
+};
 
-export default Summary;
+const mapStateToProps = state => {
+    return {
+        todos: state.todos.items,
+    }
+};
+
+export default connect(mapStateToProps)(Summary);

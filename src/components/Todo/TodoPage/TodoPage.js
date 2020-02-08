@@ -12,6 +12,10 @@ class TodoPage extends Component {
         '/all/': (<h2><FontAwesomeIcon icon={faStream}/> All items</h2>),
         '/today/': (<h2><FontAwesomeIcon icon={faCalendarDay}/> Today</h2>)
     };
+    filter = {
+        '/all/': (item)=>(true),
+        '/today/': (item) => (item.due && item.due.isSame(moment(), 'day'))
+    };
     defaultDueDate = {
         '/all/': null,
         '/today/': moment(),
@@ -25,15 +29,14 @@ class TodoPage extends Component {
             <div className="OuterBox">
                 {titleDisplay}
                 <div className="Page">
-                    <TodoAddBox addItem={this.props.addItem} defaultDueDate={defaultDueDatePassing}/>
-                    <TodoList
-                        todos={this.props.todos}
-                    />
+                    <TodoAddBox defaultDueDate={defaultDueDatePassing}/>
+                    <TodoList filter={this.filter[this.props.match.path]}/>
                 </div>
             </div>
 
         );
     }
 }
+
 
 export default TodoPage;

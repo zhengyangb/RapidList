@@ -1,4 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {connect} from 'react-redux';
+import * as actionTypes from '../../../../store/action';
 import classes from './TodoAddBox.module.css';
 
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Dropdown from '../../../UI/Dropdown/Dropdown';
 import Calendar from "../../../../container/Calendar/Calendar";
+import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 // import moment from "moment";
 
 const TodoAddBox = (props) => {
@@ -110,4 +113,13 @@ const TodoAddBox = (props) => {
     );
 };
 
-export default TodoAddBox;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItem: (item) => dispatch({
+            type: actionTypes.ADD_ITEM,
+            newItem: item
+        })
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TodoAddBox);
