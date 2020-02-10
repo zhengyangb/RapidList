@@ -23,7 +23,7 @@ const TodoListItem  = (props) => {
                 <input
                     type='checkbox'
                     checked={props.item.isDone}
-                    onChange={(event) => props.boxCheckedHandler(event, props.item.id)}
+                    onChange={props.boxCheckedHandler}
                 />
             </div>
             <div className={titleClasses.join(' ')}><span>{props.item.title}</span></div>
@@ -32,11 +32,11 @@ const TodoListItem  = (props) => {
     );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        boxCheckedHandler: (event, id)=> dispatch({
+        boxCheckedHandler: (event)=> dispatch({
             type: actionTypes.CHECKBOX,
-            id: id,
+            id: ownProps.item.id,
             checked: event.target.checked,
         })
     }
