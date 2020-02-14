@@ -1,0 +1,57 @@
+.Button{
+    width: 100%;
+    margin: 5px 0 5px 0;
+    background-color: white;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.Button:hover{
+    color: white;
+    cursor: pointer;
+}
+
+.Button:disabled{
+    cursor: not-allowed;
+    border-color: #DCDCDC;
+    color: #DCDCDC;
+}
+
+.Button:disabled:hover{
+    border-color: #DCDCDC;
+    color: #DCDCDC;
+    background-color: white;
+    cursor: not-allowed;
+}
+
+.default{
+    border: 1px solid #2E6989;
+    color: #2E6989;
+}
+
+.default:hover{
+    background-color: #2E6989;
+}
+
+
+.warning{
+    border: 1px solid #F9190E;
+    color: #F9190E;
+}
+
+.warning:hover{
+    background-color: #F9190E;
+}
+
+.light{
+    border: 0;
+    outline: none;
+    color: #2E6989;
+}
+
+.light:hover{
+    background-color: #2E6989;
+}
+

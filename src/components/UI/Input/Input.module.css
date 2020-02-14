@@ -1,0 +1,23 @@
+.Input {
+    height: 2em;
+    width: 100%;
+    padding: 2px;
+    box-sizing: border-box;
+    margin: 10px auto 10px auto;
+}
+
+
+.InputElement {
+    outline: none;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    boarder: 1px solid #DCDCDC;
+    background-color: white;
+    font: inherit;
+    padding: 0.5em;
+    margin: auto;
+}
+
+.inputElement:focus{
+}

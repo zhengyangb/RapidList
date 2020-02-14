@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import classes from './Summary.module.css';
 import CountUp from "react-countup";
-import listItemContext from "../../context/listItem-context";
+// import listItemContext from "../../context/listItem-context";
 
-import moment from "moment";
+// import moment from "moment";
 import {faClipboardCheck} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

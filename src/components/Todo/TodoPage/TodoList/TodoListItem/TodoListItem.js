@@ -1,14 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actionTypes from '../../../../../store/action';
+import * as actionCreators from '../../../../../store/action';
 import classes from './TodoListItem.module.css';
 import moment from "moment";
-import listItemContext from "../../../../../context/listItem-context";
+// import listItemContext from "../../../../../context/listItem-context";
 
 
 const TodoListItem  = (props) => {
-    const date = props.item.due === null? '' : props.item.due.format('MMM D');
-    const isOverdue = props.item.due === null || props.item.due === undefined || props.item.isDone? false: props.item.due.isSameOrBefore(moment(), 'day');
+    const dateObject = props.item.due ? moment(props.item.due) : null;
+    const date = dateObject ? dateObject.format('MMM D'):null;
+    const isOverdue = dateObject && !props.item.isDone ? dateObject.isSameOrBefore(moment(), 'day') : false ;
     const titleClasses = [classes.ItemTitle, props.item.isDone?classes.isDone:classes.isNotDone];
 
     // We replaced Context with Redux
@@ -26,7 +27,10 @@ const TodoListItem  = (props) => {
                     onChange={props.boxCheckedHandler}
                 />
             </div>
-            <div className={titleClasses.join(' ')}><span>{props.item.title}</span></div>
+            <div
+                className={titleClasses.join(' ')}
+                onClick={props.boxCheckedHandler}
+            ><span>{props.item.title}</span></div>
             <div className={[classes.ItemAddInfo, isOverdue? classes.overdue : classes.notdue].join(' ')}>{date}</div>
         </li>
     );
@@ -34,11 +38,7 @@ const TodoListItem  = (props) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        boxCheckedHandler: (event)=> dispatch({
-            type: actionTypes.CHECKBOX,
-            id: ownProps.item.id,
-            checked: event.target.checked,
-        })
+        boxCheckedHandler: () => dispatch(actionCreators.checkboxAndUpdateTodoItems(ownProps))
     }
 };
 
